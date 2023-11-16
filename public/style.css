@@ -1,6 +1,7 @@
 body {
-  font-family: Arial, sans-serif;
-  text-align: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #121212;
+  color: #fff;
   margin: 0;
   padding: 0;
 }
@@ -9,7 +10,64 @@ body {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+  border: 1px solid #282828;
+  border-radius: 10px;
+  background-color: #282828;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+h1,
+h2 {
+  color: #1db954;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.popup p {
+  margin-bottom: 10px;
+  color: #000000;
+}
+
+.popup button {
+  padding: 10px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+body.blurred::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  z-index: 999;
+}
+
+/* Animation keyframes */
+@keyframes fadeInUp {
+  from {
+    transform: translate(-50%, -60%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
 }

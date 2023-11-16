@@ -5,15 +5,12 @@ const SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token";
 const SPOTIFY_CURRENT_TRACK_URL =
   "https://api.spotify.com/v1/me/player/currently-playing";
 
-// Construct the authorization URL
-const scopes = "user-read-playback-state"; // Add more scopes if needed
-const redirectUri = encodeURIComponent("http://localhost:3001"); // Replace with your redirect URI
+const scopes = "user-read-playback-state";
+const redirectUri = encodeURIComponent("http://localhost:3001");
 const authUrl = `${SPOTIFY_AUTH_ENDPOINT}?client_id=${SPOTIFY_CLIENT_ID}&response_type=token&redirect_uri=${redirectUri}&scope=${encodeURIComponent(
   scopes
 )}`;
 let accessToken = null;
-
-console.log("Spotify Authorization URL:", authUrl); // Log the authorization URL
 
 async function getAccessToken() {
   const authData = {
@@ -32,7 +29,20 @@ async function getAccessToken() {
   return tokenData.access_token;
 }
 
-// Parse the access token from the URL fragment
+function showPopup() {
+  document.body.classList.add("blurred");
+
+  const popup = document.getElementById("popup");
+  popup.style.display = "block";
+
+  const makeItWorkBtn = document.getElementById("makeItWorkBtn");
+  makeItWorkBtn.addEventListener("click", () => {
+    window.location.href = authUrl;
+    document.body.classList.remove("blurred");
+    popup.style.display = "none";
+  });
+}
+
 if (typeof window !== "undefined") {
   const hashParams = window.location.hash.substr(1).split("&");
   const accessTokenParam = hashParams.find((param) =>
@@ -41,10 +51,11 @@ if (typeof window !== "undefined") {
   accessToken = accessTokenParam ? accessTokenParam.split("=")[1] : null;
 }
 
-// Use the access token for authorized requests
 async function getCurrentTrack() {
   if (!accessToken) {
-    console.log("Access token not found. Please authorize the app.");
+    console.log("User access token not found.");
+    showPopup();
+    console.log("Spotify Auth URL:", authUrl);
     return null;
   }
 
@@ -88,7 +99,7 @@ async function fetchLyrics(trackName, artistName) {
         `${PROXY_URL}?url=${encodeURIComponent(MUSIXMATCH_API_URL)}`
       );
       const data = await response.json();
-      console.log(JSON.stringify(data, null, 2)); // Pretty-print the JSON response
+      console.log(JSON.stringify(data, null, 2));
     } catch (error) {
       console.error("Error fetching lyrics:", error);
     }
@@ -129,6 +140,8 @@ async function updateUI() {
   }
 }
 
-// Update the UI on page load and every 10 seconds
 updateUI();
-//setInterval(updateUI, 10000);
+setInterval(() => {
+  updateUI();
+  console.log("App refreshed");
+}, 10000);

@@ -1,10 +1,15 @@
-<!-- views/index.html -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Spotify and Musixmatch Web App</title>
+    <link
+      rel="icon"
+      href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/2048px-Spotify_logo_without_text.svg.png"
+      type="image/png"
+    />
+
+    <title>Lyricfy</title>
     <link rel="stylesheet" type="text/css" href="/style.css" />
   </head>
   <body>
@@ -15,6 +20,11 @@
       <h2>Lyrics</h2>
       <p id="lyrics"></p>
     </div>
-    <script src="/script.js"></script>
+
+    <div id="popup" class="popup">
+      <p>Spotify isn't authorized/linked, and now this app can't work :(</p>
+      <button id="makeItWorkBtn">Make me work :)</button>
+    </div>
   </body>
+  <script src="script.js"></script>
 </html>
