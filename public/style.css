@@ -28,16 +28,20 @@ h2 {
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 20px;
-  background-color: #fff;
-  border: 2px solid #ccc;
+  background-color: #282828;
+  border-radius: 18px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   animation: fadeInUp 0.5s ease-out;
+  width: 550px;
+  height: 150px;
 }
 
-.popup p {
-  margin-bottom: 10px;
-  color: #000000;
+.popup p { 
+  margin-bottom: 7px;
+  color: #fff;
+  font-weight: 600;
+  font-size: medium;
 }
 
 .popup button {
@@ -46,6 +50,8 @@ h2 {
   color: #fff;
   border: none;
   cursor: pointer;
+  border-radius: 10px;
+  margin-top: 70px;
 }
 
 body.blurred::after {
