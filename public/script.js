@@ -89,7 +89,7 @@ async function getCurrentTrack() {
 async function fetchLyrics(trackName, artistName) {
   const PROXY_URL = "http://localhost:3001/proxy";
   const MUSIXMATCH_API_KEY = "c409f2c5e27276740f820e44aa028165";
-  const MUSIXMATCH_API_URL = `https://api.musixmatch.com/ws/1.1/track.lyrics.get?apikey=${MUSIXMATCH_API_KEY}&q_track=${encodeURIComponent(
+  const MUSIXMATCH_API_URL = `https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?apikey=${MUSIXMATCH_API_KEY}&q_track=${encodeURIComponent(
     trackName
   )}&q_artist=${encodeURIComponent(artistName)}`;
 
@@ -122,14 +122,17 @@ async function updateUI() {
   const trackElem = document.getElementById("trackName");
   const artistElem = document.getElementById("artistName");
   const lyricsElem = document.getElementById("lyrics");
+  const albumElem = document.getElementById("albumName");
 
   const trackData = await getCurrentTrack();
   if (trackData) {
     const trackName = trackData.name;
     const artistName = trackData.artists[0].name;
+    const albumName = trackData.album.name;
 
     trackElem.textContent = trackName;
     artistElem.textContent = artistName;
+    albumElem.textContent = albumName;
 
     const lyrics = await fetchLyrics(trackName, artistName);
     lyricsElem.textContent = lyrics;
@@ -137,6 +140,7 @@ async function updateUI() {
     trackElem.textContent = "No track currently playing";
     artistElem.textContent = "";
     lyricsElem.textContent = "";
+    albumElem.textContent = "";
   }
 }
 
