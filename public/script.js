@@ -1,5 +1,5 @@
 // Spotify API
-const SPOTIFY_CLIENT_ID = "afe8912b7a614dbeb279f7fba70fc88f";
+const SPOTIFY_CLIENT_ID = "KEY-HERE";
 const SPOTIFY_AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 const SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token";
 const SPOTIFY_CURRENT_TRACK_URL =
@@ -88,7 +88,7 @@ async function getCurrentTrack() {
 
 async function fetchLyrics(trackName, artistName) {
   const PROXY_URL = "http://localhost:3001/proxy";
-  const MUSIXMATCH_API_KEY = "c409f2c5e27276740f820e44aa028165";
+  const MUSIXMATCH_API_KEY = "KEY-HERE";
   const MUSIXMATCH_API_URL = `https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?apikey=${MUSIXMATCH_API_KEY}&q_track=${encodeURIComponent(
     trackName
   )}&q_artist=${encodeURIComponent(artistName)}`;
